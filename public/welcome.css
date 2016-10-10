@@ -1,0 +1,17 @@
+body{
+	font-family: "Comic Sans MS";
+	color: white;
+	background-color: #107896;
+	text-align: center;
+}
+
+p{
+	margin-top: 250px;
+	font-size: 30px;
+}
+
+a{
+	margin-top: 250px;
+	font-size: 30px;
+	color: white;	
+}

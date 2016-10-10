@@ -1,0 +1,29 @@
+body{
+	font-family: "Comic Sans MS";
+	color: white;
+	background-color: #107896;
+}
+
+h1{
+	text-align: center;
+}
+
+.form-group {
+	margin-top: 200px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.input{
+	margin-top: 20px;
+}
+
+.checkbox{
+	text-align: center;
+	margin-top: 20px;	
+}
+
+.submit{
+	margin-top: 20px;
+	text-align: center;
+}
