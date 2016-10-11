@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\UrlControllers; // calling our Controller
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,23 +12,11 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return '';
+$app->get('/', function() use ($app){
+	return view('frontpage');
 });
 
-// Not sure what's going on here
-/*$app->get('/{url}', function($url) use ($app){
-	return "This is the url page for " . $url;
-});*/
+// Using post because we are posting form data from before
+$app->post('/shortURL','UrlController@shortURL');
 
-$app->get('/url', 'UrlController@index');
-
-$app->get('/url/{id}', 'UrlController@getUrl');
-
-$app->post('/url', 'UrlController@saveUrl');
-
-$app->put('/url/{id}', 'UrlController@updateUrl');
-
-$app->delete('/url/{id}', 'UrlController@deleteUrl');
-
-
+?>

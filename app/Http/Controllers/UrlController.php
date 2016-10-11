@@ -5,38 +5,40 @@ namespace App\Http\Controllers;
 use App\Url;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use Resources\Views;
+use App\Custom\mytinyURL;
 
 class UrlController extends Controller{
-	public function index(){
-		$urls = Url::all();
-		return response()->json($urls);
-	}	
+	public function shortURL(){
 
-	public function getUrl($id){
-		$url = Url::find($id);
-		return response()->json($url);
-	}
+		echo view('shortURL');
+	
+		if(empty($_POST["url"])){					
+			echo "URL is required in the box";
+		}
 
-	public function saveUrl(Request $request){
-		$url = Url::create($request->all());
-		return response()->json($url);
-	}
+		else{
+			
+			$url = $_POST["url"];
+			$redis = Redis::connection();
 
-	public function deleteUrl($id){
-		$url = Url::find($id);
+			try{
+				// Creating a new tiny URL object and retrieving the short URL using it's method
+				$tinyURL= new mytinyURL();
+				$new_url = $tinyURL->getTinyURL($redis->dbSize()); 
 
-		$url->delete();
 
-		return response()->json('success');
-	}
+				// Each short URL is the key and the value is the original URL
+				$redis->set($new_url,$url);
+			}
 
-	public function updateUrl(Request $request, $id){
-		$url = Url::find($id);
+			catch(Exception $e){
+				print $e;
+			}
+			
+			echo "<a href='$url'>$new_url</a>"; // Doesn't work the way it should
+		}	
 
-		$url->url = $request->input('url');
-
-		$url->save();
-
-		return response()->json($url);
 	}
 }
