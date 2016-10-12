@@ -101,14 +101,14 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
 if (getenv('REDIS_URL')) {
     $url = parse_url(getenv('REDIS_URL'));
 
-    echo $url['scheme'] . $url['host'] . $url['port'] . $url['pass'];
+    echo $url['host'] . ' ' . $url['port'] . ' ' . $url['pass'];
     putenv('REDIS_HOST='.$url['host']);
     putenv('REDIS_PORT='.$url['port']);
 
-    if($url['port'] != 'localhost') {
+    /*if($url['port'] != 'localhost') {
     	echo "done";
     	putenv('REDIS_PASSWORD='.$url['pass']);
-    }
+    }*/
 }
 
 return $app;
