@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\UrlControllers; // calling our Controller
+use Illuminate\Support\Facades\Redis;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -18,5 +19,11 @@ $app->get('/', function() use ($app){
 
 // Using post because we are posting form data from before
 $app->post('/shortURL','UrlController@shortURL');
+
+$app->get('{url}',function($url) use ($app){
+	$redis = Redis::connection();
+	$new_url = Redis::get($url);
+	echo $new_url;
+});
 
 ?>

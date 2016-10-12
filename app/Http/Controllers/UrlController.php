@@ -39,8 +39,11 @@ class UrlController extends Controller{
 				print $e;
 			}
 			
-			echo "<a href='$url'>$tinyurl</a>"; // Doesn't work the way it should
+			echo "<a href='$tinyurl'>$tinyurl</a>"; // Doesn't work the way it should
 		}	
+	}
 
+	public function redirectURL(){
+		
 	}
 }
