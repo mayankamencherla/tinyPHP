@@ -22,7 +22,8 @@
             "app/Custom",
             "bootstrap/",
             "routes/",
-            "resources/views/"
+            "resources/views/",
+            "vendor/"
         ]
     },
     "autoload-dev": {
