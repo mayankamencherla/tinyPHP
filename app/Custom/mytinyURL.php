@@ -1,5 +1,7 @@
 <?php namespace App\Custom;
 
+use Hashids\Hashids;
+
 class mytinyURL{
 
 	function getTinyURL($index){
@@ -15,9 +17,13 @@ class mytinyURL{
 		while($index>0){
 			$remainder = $index%62;
 			//echo $remainder;
-			$hash .= substr($map,$remainder,1);
+			$hash .= $remainder;//substr($map,$remainder,1);
+
 			$index = (int)($index/62);	
 		}
+
+		$hashids = new Hashids("This is my salt");
+		$hash = $hashids->encode($hash);
 
 		return strrev($hash); // Works well
 	}
