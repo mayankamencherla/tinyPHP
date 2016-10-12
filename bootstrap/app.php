@@ -100,6 +100,7 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
 // LOADING THE REDIS CONFIG
 if (getenv('REDIS_URL')) {
     $url = parse_url(getenv('REDIS_URL'));
+    print_r(array_keys($url));
     echo $url['host'] . $url['port'];
     putenv('REDIS_HOST='.$url['host']);
     putenv('REDIS_PORT='.$url['port']);
