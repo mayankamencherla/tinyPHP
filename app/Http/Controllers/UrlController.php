@@ -22,28 +22,38 @@ class UrlController extends Controller{
 
 			$url = $_POST["url"];
 			$redis = Redis::connection();
-			//$host = $redis->getConnection()->getParameters()->host;
-			//$port = $redis->getConnection()->getParameters()->port;
 
 			try{
 				// Creating a new tiny URL object and retrieving the short URL using it's method
 				$myURL = new mytinyURL();
-				$tinyurl = $myURL->getTinyURL(Redis::dbSize()); 
-
+				$hash = $myURL->getTinyURL(Redis::dbSize()); 
+				$tinyurl = url() . "short/" . $hash;
 
 				// Each short URL is the key and the value is the original URL
-				Redis::set($tinyurl,$url);
+				Redis::set($hash,$url);
 			}
 
 			catch(Exception $e){
 				print $e;
 			}
 			
-			echo "<a href='$tinyurl'>$tinyurl</a>"; // Doesn't work the way it should
+			echo "<a href='/short/$hash'>$tinyurl</a>"; // Doesn't work the way it should
 		}	
+
 	}
 
-	public function redirectURL(){
-		
+	public function redirectURL($hash){
+
+			$redis = Redis::connection();
+
+			try{
+				$url = Redis::get($hash);
+			}
+
+			catch(Exception $e){
+				print $e;
+			}
+
+			return redirect($url);
 	}
 }

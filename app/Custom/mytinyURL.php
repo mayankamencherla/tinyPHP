@@ -8,19 +8,18 @@ class mytinyURL{
 		// Need to get this lumen ready! :)
 		$map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; // length of 62
 
-		$URL = "http://short/";
-		$num = "";
+		$hash = "";
 
-		if($index == 0) $num .= $map[0];
+		if($index == 0) $hash .= $map[0];
 
 		while($index>0){
 			$remainder = $index%62;
 			//echo $remainder;
-			$num .= substr($map,$remainder,1);
+			$hash .= substr($map,$remainder,1);
 			$index = (int)($index/62);	
 		}
 
-		return $URL . strrev($num); // Works well
+		return strrev($hash); // Works well
 	}
 
 }
