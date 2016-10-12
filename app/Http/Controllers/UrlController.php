@@ -28,11 +28,11 @@ class UrlController extends Controller{
 			try{
 				// Creating a new tiny URL object and retrieving the short URL using it's method
 				$myURL = new mytinyURL();
-				$tinyurl = $myURL->getTinyURL(/*$redis->dbSize()*/0); 
+				$tinyurl = $myURL->getTinyURL(Redis::dbSize()); 
 
 
 				// Each short URL is the key and the value is the original URL
-				$redis->set($tinyurl,$url);
+				Redis::set($tinyurl,$url);
 			}
 
 			catch(Exception $e){
