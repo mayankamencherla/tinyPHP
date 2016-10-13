@@ -13,8 +13,6 @@ class mytinyURL{
 		// Getting salt from env
 		$salt = getenv('SALT');
 
-		echo $salt;
-
 		$hashids = new Hashids($salt,$map);
 		$hash = $hashids->encode($hash);
 
