@@ -17,7 +17,6 @@ $app->get('/', function() use ($app){
 	return view('frontpage');
 });
 
-// Using post because we are posting form data from before
 $app->post('/shortURL','UrlController@shortURL');
 
 $app->get('/{hash}', array('as'=>'hash','uses'=>'UrlController@redirectURL'));
