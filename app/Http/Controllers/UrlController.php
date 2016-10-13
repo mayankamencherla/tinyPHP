@@ -24,12 +24,12 @@ class UrlController extends Controller{
 			$redis = Redis::connection();
 
 			try{
-				// Creating a new tiny URL object and retrieving the short URL using it's method
+				// Creating a new tiny URL object and retrieving the short URL hash using the method from the tiny url class 
 				$myURL = new mytinyURL();
 				$hash = $myURL->getTinyURL(Redis::dbSize()); 
 				$tinyurl = url() . "/short/" . $hash;
 
-				// Each short URL is the key and the value is the original URL
+				// Each hash is the key and the value is the original URL
 				Redis::set($hash,$url);
 			}
 
